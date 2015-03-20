@@ -42,5 +42,9 @@ It's important that the bot will react only when an authorized user (specified i
 - Convert to gem with `$PATH` executable
 - Tests & travis compatibility
 
+## License
+This project is released under the GPLv2 license.
+
 ## Credits
 The launcher code in `lib/launcher.rb` was inspired by [robhurring/thunder](https://github.com/robhurring/thunder).
+
