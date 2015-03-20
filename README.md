@@ -35,8 +35,12 @@ It's important that the bot will react only when an authorized user (specified i
 
 ## TODO
 - Listen to a nick other than `hwping`
-- High-precision timer for more precise positioning
-- Use event-based solution instead of threads
+- High-precision timer for better positioning
+- Event-based solution instead of threads
+- Specify different configuration file using an argument
+- Add a superuser to modify the list of authorized users during runtime
+- Convert to gem with `$PATH` executable
+- Tests & travis compatibility
 
 ## Credits
 The launcher code in `lib/launcher.rb` was inspired by [robhurring/thunder](https://github.com/robhurring/thunder).
