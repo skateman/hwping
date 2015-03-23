@@ -15,7 +15,6 @@ config['port'] = config.fetch("port", 6667)
 config['channels'] = config.fetch("channels", [])
 config['targets'] = config.fetch('targets', {})
 config['auth_nicks'] = config.fetch('auth_nicks', [])
-launcher.reset
 
 bot = Cinch::Bot.new do |bot|
   configure do |c|
