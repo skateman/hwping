@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'libusb'
-gem 'cinch'
+gemspec
+
+gem 'libusb', '~> 0.5.0'
+gem 'cinch', '~> 2.2.4'

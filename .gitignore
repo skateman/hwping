@@ -9,8 +9,6 @@
 /test/version_tmp/
 /tmp/
 /config.yml
-/config
-/.ssh_key
 
 ## Specific to RubyMotion:
 .dat*

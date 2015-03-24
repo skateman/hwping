@@ -2,20 +2,31 @@
 IRC bot for HW pinging with the Dream Cheeky Thunder missile launcher.
 
 ## Installation
-The bot was tested on ruby 2.0.0-p643, but it should work with other versions.
+The bot was tested on **ruby 2.0.0-p643**, but it should work with other versions. It uses `libusb` for the USB communication and `cinch` as the IRC client.
 ```bash
-cp config_sample.yml config.yml
-bundle install
+gem install hwping
 ```
-
-### Configuration
-The bot uses `config.yml` as a configuration file, which is automatically saved upon exit. It has some default settings, so it will even run without it. For all available settings see the `config_sample.yml` file.
 
 ## Usage
 ```bash
-bundle exec ruby hwping.rb
+hwping [options]
 ```
-It's important that the bot will react only when an authorized user (specified in the configuration file) sends him a message!
+
+### Configuration
+The bot uses `./config.yml` as a configuration file, which is automatically saved upon exit. An alternative configuration file can be specified with the `-c/--config-file` argument.
+
+The default settings are those:
+
+```yaml
+---
+nick: hwping
+server: irc.freenode.net
+port: 6667
+channels: # an array of channels to listen without the beginning # symbol
+  - hwping-test
+auth_nicks: # an array of nicks to obey
+targets: # a hash in {nick => [x, y]} format specifying the possible targets
+```
 
 ### Channel message commands:
 - `hwping <nick>` - fire a rocket at &lt;nick&gt; when he has been set as a target and is present in the channel's user list
@@ -36,14 +47,12 @@ It's important that the bot will react only when an authorized user (specified i
 - Listen to a nick other than `hwping`
 - High-precision timer for better positioning
 - Event-based solution instead of threads
-- Specify different configuration file using an argument
 - Add a superuser to modify the list of authorized users during runtime
-- Convert to gem with `$PATH` executable
 - Tests & travis compatibility
 
 ## License
 This project is released under the GPLv2 license.
 
 ## Credits
-The launcher code in `lib/launcher.rb` was inspired by [robhurring/thunder](https://github.com/robhurring/thunder).
+The launcher code in `lib/hwping/launcher.rb` was inspired by [robhurring/thunder](https://github.com/robhurring/thunder).
 
