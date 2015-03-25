@@ -19,7 +19,6 @@ It's important that the bot will react only when an authorized user (specified i
 
 ### Channel message commands:
 - `hwping <nick>` - fire a rocket at &lt;nick&gt; when he has been set as a target and is present in the channel's user list
-- `hwping joke` - calls the api from icndb.com to tell a random fact about &lt;botnick&gt;
 
 ### Private message commands:
 - `help` - displays a help text

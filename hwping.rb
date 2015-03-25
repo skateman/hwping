@@ -24,15 +24,7 @@ bot = Cinch::Bot.new do |bot|
     c.channels = config['channels'].map { |m| "\##{m}"}
   end
 
-  on :channel, "hwping joke" do |e|
-    next if unauthorized?(config["auth_nicks"], e)
-    uri = URI('http://api.icndb.com/jokes/random?firstName=hwping&lastName=')
-    json = JSON.parse(Net::HTTP.get(uri))
-    joke = CGI.unescapeHTML json['value']['joke'].sub("  ", " ")
-    e.reply joke
-  end
-
-  on :channel, /^hwping,? (?!joke)/ do |e|
+  on :channel, /^hwping,?\s+(.*)\s*/ do |e|
     next if unauthorized?(config["auth_nicks"], e)
     nick = e.message.sub(/^hwping\s+([^\s]+)\s*/, '\1')
     if bot.user_list.find(nick) && config['targets'].has_key?(nick)
@@ -58,7 +50,6 @@ bot = Cinch::Bot.new do |bot|
     e.reply "  target set <nick>"
     e.reply "  target get <nick>"
     e.reply "  target del <nick>"
-    e.reply "If you're sad, just type 'hwping joke' into the channel window!"
   end
 
   on :private, "fire" do |e|
