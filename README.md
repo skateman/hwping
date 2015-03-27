@@ -1,4 +1,7 @@
 # hwping
+
+[![Build Status](https://travis-ci.org/skateman/hwping.svg)](https://travis-ci.org/skateman/hwping)
+
 IRC bot for HW pinging with the Dream Cheeky Thunder missile launcher.
 
 ## Installation
