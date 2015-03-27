@@ -48,7 +48,6 @@ targets: # a hash in {nick => [x, y]} format specifying the possible targets
 - High-precision timer for better positioning
 - Event-based solution instead of threads
 - Add a superuser to modify the list of authorized users during runtime
-- Tests & travis compatibility
 
 ## License
 This project is released under the GPLv2 license.
