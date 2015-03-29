@@ -1,6 +1,9 @@
 # hwping
 
+[![Gem Version](https://badge.fury.io/rb/hwping.svg)](http://badge.fury.io/rb/hwping)
+[![Dependency Status](https://gemnasium.com/skateman/hwping.svg)](https://gemnasium.com/skateman/hwping)
 [![Build Status](https://travis-ci.org/skateman/hwping.svg)](https://travis-ci.org/skateman/hwping)
+[![Inline docs](http://inch-ci.org/github/skateman/hwping.svg?branch=master)](http://inch-ci.org/github/skateman/hwping)
 
 IRC bot for HW pinging with the Dream Cheeky Thunder missile launcher.
 
