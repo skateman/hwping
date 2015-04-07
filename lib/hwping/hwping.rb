@@ -15,7 +15,7 @@ module HWPing
     end
 
     def stop
-      @bot.quit
+      @bot.stop
     end
 
     # Return the configuration hash for an export

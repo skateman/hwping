@@ -9,12 +9,12 @@ module HWPing
     attr_accessor :targets
 
     def initialize(hash = {})
-      @server   = hash.fetch(:server,   'irc.freenode.net')
-      @port     = hash.fetch(:port,     6667)
-      @nick     = hash.fetch(:nick,     'hwping')
-      @channels = hash.fetch(:channels, ['hwping-test'])
-      @auth     = hash.fetch(:auth    , [])
-      @targets  = hash.fetch(:targets,  [])
+      @server   = hash.fetch('server',   'irc.freenode.net')
+      @port     = hash.fetch('port',     6667)
+      @nick     = hash.fetch('nick',     'hwping')
+      @channels = hash.fetch('channels', ['hwping-test'])
+      @auth     = hash.fetch('auth'    , [])
+      @targets  = hash.fetch('targets',  [])
     end
 
     def to_hash

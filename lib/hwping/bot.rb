@@ -32,36 +32,36 @@ module HWPing
 
     # Initialize a bot and return with its Cinch instance
     def initialize(handler, config = {})
-      @nick     = config.nick
-      @server   = config.server
-      @port     = config.port
-      @channels = config.channels.map { |m| "\##{m}"}
-      @handler  = handler
-      return setup_bot()
-    end
-
-  private
-    def setup_bot
-      bot = Cinch::Bot.new do |b|
+      @bot = Cinch::Bot.new do |b|
         configure do |c|
-          c.nick     = @nick
-          c.server   = @server
-          c.port     = @port
-          c.channels = @channels
+          c.nick     = config.nick
+          c.server   = config.server
+          c.port     = config.port
+          c.channels = config.channels.map { |m| "\##{m}"}
         end
 
         # For channel mesages, just reply with the matching message
         on :channel, /^hwping/ do |e|
-          r = @handler.channel(e)
+          r = handler.channel(e)
           e.reply(MESSAGES[r])
         end
 
         # For private messages, build a reply message from the format strinc and the passed variables
         on :private do |e|
-          (r, *f) = @handler.message(e)
+          (r, *f) = handler.private(e)
           e.reply(MESSAGES[r] % f)
         end
       end
+    end
+
+    # Start the bot
+    def start
+      @bot.start
+    end
+
+    # Stop the bot
+    def stop
+      @bot.quit
     end
   end
 end

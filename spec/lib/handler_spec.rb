@@ -7,12 +7,12 @@ describe HWPing::Handler do
   let(:event) { double() }
   let(:config) do
     HWPing::Config.new(
-      :server   => 'irc.freenode.net',
-      :port     => 6667,
-      :nick     => 'hwping',
-      :channels => ['hwping-test'],
-      :auth     => ['auth_nick'],
-      :targets  => {
+      'server'   => 'irc.freenode.net',
+      'port'     => 6667,
+      'nick'     => 'hwping',
+      'channels' => ['hwping-test'],
+      'auth'     => ['auth_nick'],
+      'targets'  => {
         'target_nick_1' => [120, 340],
         'target_nick_2' => [410, 680]
       }
