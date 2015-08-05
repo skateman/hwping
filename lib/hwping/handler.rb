@@ -11,7 +11,7 @@ module HWPing
     # If the event happened in a channel, return just with a symbol
     def channel(event)
       if event.message =~ /^hwping,?\s+(.*)\s*$/
-        if @auth.include?(event.user.to_s)
+        if authorized?(event.user.to_s)
           if @targets.include?($1)
             @launcher.point_and_fire(@targets[$1])
             return :firing
@@ -26,7 +26,7 @@ module HWPing
 
     # If the event happened in a private window, return with an array
     def private(event)
-      if @auth.include?(event.user.to_s)
+      if authorized?(event.user.to_s)
         case event.message
         when "fire"
           @launcher.fire
@@ -63,6 +63,15 @@ module HWPing
       else
         return [:unauthorized]
       end
+    end
+
+  private
+
+    def authorized?(nick)
+      @auth.each do |user|
+        return true if user =~ /^#{nick}(?:\b?|\S?)/
+      end
+      return false
     end
   end
 end

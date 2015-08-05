@@ -173,4 +173,28 @@ describe HWPing::Handler do
       end
     end
   end
+
+  context 'from authorized nick with set mod' do
+    let(:nick) {'auth_nick|afk'}
+
+    describe 'channel message' do
+      let(:response) { subject.channel(event) }
+
+      it 'beginning with hwping combined with an existing target' do
+        expect(event).to receive(:message).and_return('hwping target_nick_1')
+        expect(launcher).to receive(:point_and_fire).with([120, 340])
+        expect(response).to eq(:firing)
+      end
+
+      it 'beginning with hwping combined with a non-existing target' do
+        expect(event).to receive(:message).and_return('hwping target_nick_3')
+        expect(response).to eq(:notarget)
+      end
+
+      it 'not beginning with hwping' do
+        expect(event).to receive(:message).and_return('something unimportant')
+        expect(response).to be_nil
+      end
+    end
+  end
 end
