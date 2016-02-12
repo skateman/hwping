@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 module HWPing
-  VERSION = '0.1'
-  APP_NAME = 'hwping'
-  REPO_URL = 'http://github.com/skateman/hwping'
-  CONFIG_FILE = 'config.yml'
+  VERSION = '0.1'.freeze
+  APP_NAME = 'hwping'.freeze
+  REPO_URL = 'http://github.com/skateman/hwping'.freeze
+  CONFIG_FILE = 'config.yml'.freeze
 end

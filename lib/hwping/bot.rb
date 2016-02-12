@@ -2,7 +2,6 @@ require 'cinch'
 
 module HWPing
   class Bot
-
     MESSAGES = {
       :unauthorized => "Sorry, you're unauthorized to use this bot!",
       :firing       => 'Firing rocket in 5 seconds!',
@@ -28,16 +27,16 @@ module HWPing
           target set <nick> <right> <up>\n
           target get <nick>\n
           target del <nick>\n"
-    }
+    }.freeze
 
     # Initialize a bot and return with its Cinch instance
     def initialize(handler, config = {})
-      @bot = Cinch::Bot.new do |b|
+      @bot = Cinch::Bot.new do
         configure do |c|
           c.nick     = config.nick
           c.server   = config.server
           c.port     = config.port
-          c.channels = config.channels.map { |m| "\##{m}"}
+          c.channels = config.channels.map { |m| "\##{m}" }
         end
 
         # For channel mesages, just reply with the matching message

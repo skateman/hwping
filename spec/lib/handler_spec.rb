@@ -2,9 +2,8 @@ require 'hwping/handler'
 require 'hwping/config'
 
 describe HWPing::Handler do
-
-  let(:launcher) { double() }
-  let(:event) { double() }
+  let(:launcher) { double }
+  let(:event) { double }
   let(:config) do
     HWPing::Config.new(
       'server'   => 'irc.freenode.net',
@@ -26,7 +25,7 @@ describe HWPing::Handler do
   end
 
   context 'from unauthorized nick' do
-    let(:nick) {'unauth_nick'}
+    let(:nick) { 'unauth_nick' }
 
     describe 'channel message' do
       let(:response) { subject.channel(event) }
@@ -52,7 +51,7 @@ describe HWPing::Handler do
   end
 
   context 'from authorized nick' do
-    let(:nick) {'auth_nick'}
+    let(:nick) { 'auth_nick' }
 
     describe 'channel message' do
       let(:response) { subject.channel(event) }
@@ -120,7 +119,7 @@ describe HWPing::Handler do
         expect(event).to receive(:message).and_return('target set target_nick_3 210 320')
         expect(response).to eq([:target_set, 210, 320])
         expect(event).to receive(:message).and_return('target list')
-        expect(list).to eq([:target_list, "target_nick_1, target_nick_2, target_nick_3"])
+        expect(list).to eq([:target_list, 'target_nick_1, target_nick_2, target_nick_3'])
       end
 
       it 'target set with no position' do
@@ -128,14 +127,14 @@ describe HWPing::Handler do
         expect(launcher).to receive(:position).and_return([210, 320])
         expect(response).to eq([:target_set, 210, 320])
         expect(event).to receive(:message).and_return('target list')
-        expect(list).to eq([:target_list, "target_nick_1, target_nick_2, target_nick_3"])
+        expect(list).to eq([:target_list, 'target_nick_1, target_nick_2, target_nick_3'])
       end
 
       it 'target del existing target' do
         expect(event).to receive(:message).and_return('target del target_nick_2')
         expect(response).to eq([:target_del])
         expect(event).to receive(:message).and_return('target list')
-        expect(list).to eq([:target_list, "target_nick_1"])
+        expect(list).to eq([:target_list, 'target_nick_1'])
       end
 
       it 'target del non-existing target' do
@@ -175,7 +174,7 @@ describe HWPing::Handler do
   end
 
   context 'from authorized nick with set mod' do
-    let(:nick) {'auth_nick|afk'}
+    let(:nick) { 'auth_nick|afk' }
 
     describe 'channel message' do
       let(:response) { subject.channel(event) }

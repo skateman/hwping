@@ -12,8 +12,8 @@ module HWPing
     def channel(event)
       if event.message =~ /^hwping,?\s+(.*)\s*$/
         if authorized?(event.user.to_s)
-          if @targets.include?($1)
-            @launcher.point_and_fire(@targets[$1])
+          if @targets.include?(Regexp.last_match(1))
+            @launcher.point_and_fire(@targets[Regexp.last_match(1)])
             return :firing
           else
             return :notarget
@@ -28,24 +28,30 @@ module HWPing
     def private(event)
       if authorized?(event.user.to_s)
         case event.message
-        when "fire"
+        when 'fire'
           @launcher.fire
           return [:fire]
-        when "position"
+        when 'position'
           return @launcher.position.unshift(:position)
-        when "help"
+        when 'help'
           return [:help]
-        when "reset"
+        when 'reset'
           @launcher.reset
           return [:reset]
-        when "target list"
+        when 'target list'
           return [:target_list, @targets.keys.join(', ')]
         when /^target set ([^\s]+)( (\d+) (\d+))?$/
-          @targets[$1] = $2 ? [$3.to_i, $4.to_i] : @launcher.position
-          return [:target_set, @targets[$1]].flatten
+          @targets[Regexp.last_match(1)] = begin
+            if Regexp.last_match(2)
+              [Regexp.last_match(3).to_i, Regexp.last_match(4).to_i]
+            else
+              @launcher.position
+            end
+          end
+          return [:target_set, @targets[Regexp.last_match(1)]].flatten
         when /^target ((get)|(del)) ([^\s]+)$/
-          if @targets.has_key?($+)
-            if $1 == "del"
+          if @targets.key?($+)
+            if Regexp.last_match(1) == 'del'
               @targets.delete($+)
               return [:target_del]
             else
@@ -55,7 +61,7 @@ module HWPing
             return [:notarget]
           end
         when /^((up)|(down)|(left)|(right)) (\d+)$/
-          @launcher.send($1, $+.to_i)
+          @launcher.send(Regexp.last_match(1), $+.to_i)
           return [:move]
         else
           return [:badcommand]
@@ -65,13 +71,13 @@ module HWPing
       end
     end
 
-  private
+    private
 
     def authorized?(nick)
       @auth.each do |user|
         return true if user =~ /^#{nick}(?:\b?|\S?)/
       end
-      return false
+      false
     end
   end
 end

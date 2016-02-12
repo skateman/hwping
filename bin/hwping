@@ -10,7 +10,7 @@ OptionParser.new do |opts|
   opts.version = HWPing::VERSION
   opts.program_name = HWPing::APP_NAME
   opts.banner = 'Usage: hwping [options]'
-  opts.on('-c', '--config-file file.yml', "Specify which configuration file you want to use instead of the default config.yml") do |v|
+  opts.on('-c', '--config-file file.yml', 'Specify which configuration file you want to use instead of the default config.yml') do |v|
     options[:config] = v
   end
 end.parse!
