@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'libusb', '~> 0.5.0'
-  s.add_dependency 'cinch', '~> 2.2.4'
+  s.add_dependency 'libusb', '~> 0.5.1'
+  s.add_dependency 'cinch', '~> 2.3.1'
 
-  s.add_development_dependency 'rake', '~> 10.4.2'
-  s.add_development_dependency 'rspec', '~> 3.0'
-  s.add_development_dependency 'rubocop', '~> 0.36.0'
+  s.add_development_dependency 'rake', '~> 10.5.0'
+  s.add_development_dependency 'rspec', '~> 3.4.0'
+  s.add_development_dependency 'rubocop', '~> 0.37.2'
 end
