@@ -22,7 +22,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'libusb', '~> 0.5.1'
   s.add_dependency 'cinch', '~> 2.3.1'
 
+  s.add_development_dependency 'codecov', '~> 0.1.4'
   s.add_development_dependency 'rake', '~> 10.5.0'
   s.add_development_dependency 'rspec', '~> 3.4.0'
   s.add_development_dependency 'rubocop', '~> 0.37.2'
+  s.add_development_dependency 'simplecov', '~> 0.11.2'
 end
