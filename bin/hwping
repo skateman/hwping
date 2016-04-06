@@ -19,14 +19,16 @@ end.parse!
 file = options.fetch(:config, HWPing::CONFIG_FILE)
 config = YAML.load_file(file)
 
+# Initialize the application
+app = HWPing::HWPing.new(config)
+
 # Stop the bot and save the configuration file
 at_exit do
-  app.stop
   File.open(file, 'w') do |f|
-    YAML.dump(app.config, f)
+    f.write(YAML.dump(app.config))
   end
+  app.stop
 end
 
 # Run the application
-app = HWPing::HWPing.new(config)
 app.start
