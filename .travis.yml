@@ -16,3 +16,5 @@ sudo: false
 cache: bundler
 before_install:
   - "echo 'gem: --no-ri --no-rdoc --no-document' > ~/.gemrc"
+install:
+  - "bundle install --jobs=3 --retry=3 --without=noci --path=${BUNDLE_PATH:-vendor/bundle}"

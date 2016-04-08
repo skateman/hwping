@@ -32,6 +32,11 @@ channels: # an array of channels to listen without the beginning # symbol
   - hwping-test
 auth_nicks: # an array of nicks to obey
 targets: # a hash in {nick => [x, y]} format specifying the possible targets
+webcam:
+  base: /tmp # the folder where the image will be saved
+  width: 640 
+  height: 480
+  format: jpg
 ```
 
 ### Channel message commands:
@@ -39,6 +44,7 @@ targets: # a hash in {nick => [x, y]} format specifying the possible targets
 
 ### Private message commands:
 - `help` - displays a help text
+- `snap` - creates a snapshot with the attached webcamera and returns with its URL
 - `fire` - fires a rocket
 - `reset` - resets the launcher into the default position (bottom-left)
 - `position` - returns the actual position of the rocket launcher

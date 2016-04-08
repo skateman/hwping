@@ -5,6 +5,7 @@ module HWPing
     attr_reader :nick
     attr_reader :channels
     attr_reader :auth
+    attr_reader :webcam
     attr_accessor :targets
 
     def initialize(hash = {})
@@ -14,6 +15,7 @@ module HWPing
       @channels = Array(hash.fetch('channels', ['hwping-test']))
       @auth     = Array(hash.fetch('auth', []))
       @targets  = hash.fetch('targets', {}).to_h
+      @webcam   = hash.fetch('webcam', {}).to_h
     end
 
     def to_hash
