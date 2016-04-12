@@ -5,6 +5,7 @@ module HWPing
       @targets    = config.targets
       @auth       = config.auth
       @nick       = config.nick
+      @webcam     = config.webcam
       @launcher   = launcher
     end
 
@@ -28,6 +29,8 @@ module HWPing
     def private(event)
       if authorized?(event.user.to_s)
         case event.message
+        when 'snap'
+          return [:image, ip_address(event), Snap.snap(@webcam)]
         when 'fire'
           @launcher.fire
           return [:fire]
@@ -78,6 +81,10 @@ module HWPing
         return true if user =~ /^#{nick}(?:\b?|\S?)/
       end
       false
+    end
+
+    def ip_address(event)
+      event.bot.irc.socket.addr[3]
     end
   end
 end
