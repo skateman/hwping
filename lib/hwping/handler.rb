@@ -5,6 +5,7 @@ module HWPing
       @targets    = config.targets
       @auth       = config.auth
       @nick       = config.nick
+      @webcam     = config.webcam
       @launcher   = launcher
     end
 
@@ -28,6 +29,10 @@ module HWPing
     def private(event)
       if authorized?(event.user.to_s)
         case event.message
+        when 'snap'
+          return [:image, ip_address(event), Webcam.new(@webcam).save]
+        when 'panorama'
+          return [:image, ip_address(event), panorama]
         when 'fire'
           @launcher.fire
           return [:fire]
@@ -78,6 +83,23 @@ module HWPing
         return true if user =~ /^#{nick}(?:\b?|\S?)/
       end
       false
+    end
+
+    def panorama
+      @launcher.reset
+      images = []
+      12.times do
+        images << Webcam.new(@webcam)
+        @launcher.right(400)
+      end
+      @launcher.reset
+      pano = Webcam.panorama(images, @webcam)
+      images.clear # garbage collection
+      pano.save
+    end
+
+    def ip_address(event)
+      event.bot.irc.socket.addr[3]
     end
   end
 end

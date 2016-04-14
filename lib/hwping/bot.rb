@@ -4,6 +4,7 @@ module HWPing
   class Bot
     MESSAGES = {
       :unauthorized => "Sorry, you're unauthorized to use this bot!",
+      :image        => 'Image saved at http://%s/%s',
       :firing       => 'Firing rocket in 5 seconds!',
       :notarget     => 'Unknown target!',
       :fire         => 'Rocket launch initiated!',

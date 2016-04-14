@@ -1,6 +1,7 @@
 require 'hwping/constants'
 require 'hwping/config'
 require 'hwping/launcher'
+require 'hwping/webcam'
 require 'hwping/handler'
 require 'hwping/bot'
 require 'hwping/hwping'

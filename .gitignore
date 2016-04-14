@@ -9,6 +9,7 @@
 /test/version_tmp/
 /tmp/
 /config.yml
+/lib/**/*.so
 
 ## Specific to RubyMotion:
 .dat*
