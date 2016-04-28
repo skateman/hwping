@@ -1,5 +1,5 @@
 require 'mkmf'
-$CFLAGS = '--std=c99 -O'
+$CFLAGS = '--std=gnu++14 -O3'
 $LDFLAGS = '-lopencv_core -lopencv_highgui -lopencv_stitching'
 
 have_library('opencv_core')
