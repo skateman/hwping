@@ -22,7 +22,7 @@ module HWPing
           help\n
           fire\n
           position\n
-          up|down|left|right\n
+          up|down|left|right [miliseconds]\n
           reset\n
           target list\n
           target set <nick> <right> <up>\n
