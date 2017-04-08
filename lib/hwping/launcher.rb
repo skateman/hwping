@@ -3,13 +3,12 @@ require 'libusb'
 
 module HWPing
   class Launcher
-
     DeviceNotFoundError = Class.new(IOError)
 
     DEVICE = {
       :vendor_id  => 0x2123,
       :product_id => 0x1010
-    }
+    }.freeze
 
     COMMANDS = {
       :down  => 0x01,
@@ -20,12 +19,12 @@ module HWPing
       :stop  => 0x20,
       :on    => 0x01,
       :off   => 0x00
-    }
+    }.freeze
 
     TARGETS = {
       :launcher => 0x02,
       :led      => 0x03
-    }
+    }.freeze
 
     REQUEST_TYPE  = 0x21
     REQUEST       = 0x09
@@ -38,7 +37,7 @@ module HWPing
         :idProduct => DEVICE[:product_id]
       ).first
 
-      raise DeviceNotFoundError, 'Launcher was not found.' if launcher.nil?
+      fail DeviceNotFoundError, 'Launcher was not found.' if launcher.nil?
       new(launcher)
     end
 
@@ -99,18 +98,19 @@ module HWPing
       update_pos direction, duration
     end
 
-  private
+    private
+
     # Send data through USB
     def send!(target, command)
       payload = build_payload(target, COMMANDS[command.to_sym])
 
       @handle.control_transfer(
-        bmRequestType: REQUEST_TYPE,
-        bRequest: REQUEST,
-        wValue: 0,
-        wIndex: 0,
-        dataOut: payload,
-        timeout: 0
+        :bmRequestType => REQUEST_TYPE,
+        :bRequest      => REQUEST,
+        :wValue        => 0,
+        :wIndex        => 0,
+        :dataOut       => payload,
+        :timeout       => 0
       )
     end
 

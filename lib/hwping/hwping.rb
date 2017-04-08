@@ -1,11 +1,10 @@
 module HWPing
   class HWPing
-
     attr_reader :bot
 
     def initialize(config = {})
       @config = Config.new(config)
-      @launcher = Launcher.connect()
+      @launcher = Launcher.connect
       @handler = Handler.new(@launcher, @config)
       @bot = Bot.new(@handler, @config)
     end

@@ -10,7 +10,7 @@ OptionParser.new do |opts|
   opts.version = HWPing::VERSION
   opts.program_name = HWPing::APP_NAME
   opts.banner = 'Usage: hwping [options]'
-  opts.on('-c', '--config-file file.yml', "Specify which configuration file you want to use instead of the default config.yml") do |v|
+  opts.on('-c', '--config-file file.yml', 'Specify which configuration file you want to use instead of the default config.yml') do |v|
     options[:config] = v
   end
 end.parse!
@@ -19,14 +19,16 @@ end.parse!
 file = options.fetch(:config, HWPing::CONFIG_FILE)
 config = YAML.load_file(file)
 
-# Run the application
+# Initialize the application
 app = HWPing::HWPing.new(config)
-app.start
 
 # Stop the bot and save the configuration file
 at_exit do
-  app.stop
   File.open(file, 'w') do |f|
-    YAML.dump(app.config, f)
+    f.write(YAML.dump(app.config))
   end
+  app.stop
 end
+
+# Run the application
+app.start
